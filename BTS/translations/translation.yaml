@@ -1,0 +1,7 @@
+framework:
+    default_locale: 'fr'
+    translator:
+        fallbacks: ['fr']
+
+Invalid credentials.: 'The password you entered was invalid!'
+Username could not be found. : Identifiant inconnu

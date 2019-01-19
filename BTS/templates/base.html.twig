@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    {# JQUERY #}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href = "https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">
+
+    {# Font Awesome #}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    {# Fonts #}
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow|Roboto" rel="stylesheet">
+
+    {# Icons #}
+    <link rel="shortcut icon" href="{{ asset('assets/ico/ico.png') }}">
+
+    <title>Terrain</title>
+    {% block stylesheets %}{% endblock %}
+
+  	</head>
+    <style type="text/css">
+    html { background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+    background-color: #534292;min-height:100vh;}
+    body {min-height:80vh;display: flex;font-family: 'PT Sans Narrow', sans-serif;color: white;background-color: transparent;}
+    /* Autocomplete */
+    .ui-menu-item{background: #cce5ff;color: #004085;border:0.5px solid #004085;}
+    .ui-menu-item a:focus {background-color: #004085;}
+    .ui-widget-content a{color: #004085;background:transparent;}
+    #ui-id-1 {border-radius: 0;padding: 0px;font-family: 'PT Sans Narrow', sans-serif;}
+    
+
+
+    p {font-size:1.4em;padding: 1px;margin: 4px;}
+    label {font-size:1.3em;}
+    .col-form-label {font-size:1.2em;}
+    .text-blue-light {color: #7fbeef !important;}
+    .a-logout,.a-logout:hover {text-decoration: none;border: 2px solid #7fbeef;padding: 3px 5px;border-radius: 4px;}
+    /* .a-logout:hover {background:  #7fbeef;color: white;} */
+
+
+    .btn-primary {color: #fff;background-color: #4f7cb0;border-color: #4f7cb0;}
+    .btn-primary:hover {color: #fff;background-color:#3f6da2;border-color: #3f6da2;}
+
+    .border-bottom-1 {border-bottom: 1px;}
+
+    .c-listeCities {
+    -webkit-column-count: 4; /* Chrome, Safari, Opera */
+    -moz-column-count: 4; /* Firefox */
+    column-count: 4;
+    -webkit-column-width: 25%; /* Chrome, Safari, Opera */
+    -moz-column-width: 25%; /* Firefox */
+    column-width: 25%;}
+
+    .p-city a{color: white;text-decoration: none}
+
+    .ul-search {padding-left: 0.3em;font-size:1.2em;}
+    .ul-search li{text-decoration: none;text;list-style-type: none;padding-left: 1em;font-size:1.1em;}
+
+    /* Table */
+    .border-bottom-white {border-bottom: 1px solid #ffffff26;}
+
+    /* Disabled Button */
+    .disabled { pointer-events: none; cursor: default;opacity: 0.6;}
+
+    /* Formulaires */
+    .h2-form {text-align: center;margin-bottom: 0.7em;border-bottom: 2px solid white;padding-bottom:0.6em;}
+    .form-center {max-width: 60%;margin: auto;}
+
+    .form-user input{padding: 0.85em 1.2em;font-size: 1.5em;}
+
+    .fas .fa-times:hover{color: #7fbeef;}
+
+    input[type=checkbox] { display: none;}
+    .form-check label:before {
+      content: "";
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin-right: 2px;
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid white;
+      left: 0px;
+      bottom: 8px;
+      background-color: transparent;
+      box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    }
+    .radio label:before {border-radius: 8px;}
+    input[type=checkbox]:checked + label:before {background-color: white;}
+    input[type=checkbox]:hover + label:before {
+      border-color: #7fbeef;
+      box-shadow: none;
+      color: #7fbeef;
+    }
+    label:hover {color: #7fbeef;}
+
+    /* Logo */
+    #c-logo img{position: absolute;top: 1em;left: 1em;width: 150px;}
+
+    /* Autocomplete */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:active,
+    input:-webkit-autofill:focus {
+        background-color: #FFFFFF !important;
+        color: #555 !important;
+        -webkit-box-shadow: 0 0 0 1000px white inset !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
+
+    </style>
+
+   	<body class="py-5">
+      <div id="c-logo"><img src="{{ asset('assets/img/logo.png') }}" id="logoTerrain" alt="Logo Terrain" title="Logo Terrain" /></div>
+
+        <div class="w-75 m-auto" style="max-width: 1000px;position:relative;">
+          <div class="pb-3 pt-3 d-flex align-items-end flex-column">
+
+              <a class="text-blue-light a-logout" href="{{path('logout')}}">
+              Déconnexion<i class="fas fa-sign-out-alt pl-2"></i>
+              </a>
+
+          </div>
+        {% for message in app.session.flashbag.get('message') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+
+        </div>
+        {% block javascripts %}{% endblock %}
+
+    </body>
+</html>

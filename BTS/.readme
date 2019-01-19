@@ -1,0 +1,80 @@
+#Annotations
+composer require annotations
+
+#Install maker
+composer require doctrine maker
+
+#Create controller
+php bin/console make:controller
+
+#All routes
+php bin/console debug:router
+
+#Install ORM
+composer require symfony/orm-pack
+composer require symfony/maker-bundle --dev
+
+#Create Database
+php bin/console doctrine:database:create
+
+#Create entity
+php bin/console make:entity
+
+#Update database
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+#Install Fixtures
+composer require doctrine/doctrine-fixtures-bundle --dev
+
+#Load fixtures
+php bin/console doctrine:fixtures:load
+
+#Install Validator
+composer require symfony/validator doctrine/annotations
+composer require symfony/validator
+
+#Install Security
+composer require symfony/security-bundle
+
+#Add User
+php bin/console make:user
+
+#Encode User Password
+php bin/console security:encode-password
+
+#See the toolbar
+composer require --dev symfony/profiler-pack
+
+#Add Form Authentificator
+php bin/console make:auth
+
+#Translate
+composer require symfony/translation
+
+#Clear cache
+php bin/console cache:clear
+
+#Install form
+composer require form
+
+#Generate documentation
+composer require nelmio/api-doc-bundle
+
+
+#Mise en production
+
+php bin/console cache:clear
+php bin/console cache:clear --env=prod
+
+File: .env
+-> APP_ENV=prod
+-> APP_DEBUG=0
+
+Check des dépendances
+bin/console security:check
+composer require symfony/requirements-checker
+
+#Deploiement
+composer require deployer/deployer
+https://medium.com/@runawaycoin/deploying-symfony-4-application-to-shared-hosting-with-just-ftp-access-e65d2c5e0e3d

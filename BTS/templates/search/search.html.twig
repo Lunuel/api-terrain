@@ -1,0 +1,24 @@
+<!-- Recherche  -->
+<h1>Rechercher une ville</h1>
+<form class="form-inline w-100 pb-4">
+  <input id="search" name="search" class="form-control mr-sm-2"  placeholder="Rechercher..." aria-label="Search">
+  <button class="btn btn-outline-ligth my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+</form>
+
+{% if search %}
+    <p>Résultats pour <span class="text-blue-light">{{ app.request.query.get("search") }}</span></p>
+    {# <p>Nombre de résultats : {{ search|length }}</p> #}
+    {% for city in search %}
+      <ul class="ul-search">Ville: {{ city.name }} | {{ city.codePostal }}
+      <li > <i class=" text-blue-light fas fa-long-arrow-alt-right"></i> <span class="text-blue-light">Le Secteur: {{ city.sector.name }}</span></li>
+      <li > <i class=" text-blue-light fas fa-long-arrow-alt-right"></i> <span class="text-blue-light">Le Bureau d'exploitation: {{ city.bex.name }}</span></li>
+      <li > <i class=" text-blue-light fas fa-long-arrow-alt-right"></i> <span class="text-blue-light">Le(s) Prestataire(s): {% for prestataire in city.prestataires %}{{prestataire.name }}{% if not loop.last %}, {% endif %}{% endfor %}</span></li>
+      </ul>
+    {% endfor %}
+{% else %}
+    {% if app.request.query.get("search") == '' %}
+    <p></p>
+    {% else %}
+    <p>Aucun résultat pour <span class="text-blue-light">{{ app.request.query.get("search") }}</span></p>
+    {% endif %}
+{% endif %}

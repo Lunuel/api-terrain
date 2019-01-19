@@ -1,0 +1,185 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block body %}
+	<script>
+    $(document).ready(function(){
+    	var link = "http://127.0.0.1/Symfony/BTS/public/index.php/listCities";
+		$(function() {
+			var xhReq = new XMLHttpRequest();
+		    xhReq.open("GET", link, false);
+		    xhReq.send(null);
+		    var jsonObject = JSON.parse(xhReq.responseText);
+		    $("#search").autocomplete({
+		        source: jsonObject,
+		        minLength: 2
+		    });
+		});
+    });
+
+    </script>
+
+    <script>
+	$(document).ready(function(){
+        $("#butt-sectors").click(function() {
+	      $("#c-sectors").slideToggle();
+	      $("#icon-sector").toggleClass("fa-caret-down fa-caret-up");
+	    });
+	});
+	$(document).ready(function(){
+	    $("#butt-cities").click(function() {
+	      $("#c-cities").slideToggle();
+	      $("#icon-city").toggleClass("fa-caret-down fa-caret-up");
+	    });
+    });
+		$(document).ready(function(){
+		    $("#butt-bexs").click(function() {
+		      $("#c-bexs").slideToggle();
+		      $("#icon-bex").toggleClass("fa-caret-down fa-caret-up");
+		    });
+	    });
+			$(document).ready(function(){
+			    $("#butt-prestataires").click(function() {
+			      $("#c-prestataires").slideToggle();
+			      $("#icon-prestataire").toggleClass("fa-caret-down fa-caret-up");
+			    });
+		    });
+
+			$(document).ready(function(){
+				$("#butt-delete-city").click(function() {
+				$(".a-city").toggleClass("disabled");
+				$("#icon-check-square").toggleClass("fa-square fa-check-square");
+				});
+			});
+
+			$(document).ready(function(){
+				$(".fa-times").hover(function() {
+				$(this).toggleClass("text-blue-light");
+				});
+			});
+			$(document).ready(function(){
+				$(".a-city").hover(function() {
+				$(this).toggleClass("text-blue-light");
+				});
+			});
+	</script>
+
+	{% if is_granted('ROLE_ADMIN') %}
+		{% include 'search\\search.html.twig' %}
+	{% else  %}
+		{% include 'search\\searchUser.html.twig' %}
+	{% endif  %}
+
+	<hr>
+
+	{% if is_granted('ROLE_ADMIN') %}
+
+
+	<!-- Secteurs  -->
+	<div class="alert alert-primary d-flex">
+		<div class="flex-grow-1">
+		<h4 class="">Les différents secteurs</h4>
+		</div>
+		<div class="col-auto p-0">
+		<button class="btn btn-outline-primary btn-sm" id="butt-sectors">
+			<i id="icon-sector" class="fas fa-caret-down"></i>
+		</button>
+		</div>
+	</div>
+
+	<div id="c-sectors" class="pb-3" style="display: none">
+		<table class="w-75 m-auto">
+	{% for sector in sectors %}
+			<tr class="border-bottom-white">
+				<td class="col-11"><p>{{ sector.name }}</p></td>
+				<td class="col-1 my-1"><a class="float-right" href="{{ path('deleteSector', {'id': sector.id }) }}"><i class="fas fa-times text-white"></i></a></td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+
+	<!-- Bureaux d'études  -->
+	<div class="alert alert-primary d-flex">
+		<div class="flex-grow-1">
+		<h4 class="">Les différents bureaux d'exploitations</h4>
+		</div>
+		<div class="col-auto p-0">
+		<button class="btn btn-outline-primary btn-sm" id="butt-bexs">
+			<i id="icon-bex" class="fas fa-caret-down"></i>
+		</button>
+		</div>
+	</div>
+
+	<div id="c-bexs" class="pb-3" style="display: none">
+		<table class="w-75 m-auto">
+	{% for bex in bexs %}
+			<tr class="border-bottom-white">
+				<td class="col-11"><p>{{ bex.name }}</p></td>
+				<td class="col-1 my-1"><a class="float-right" href="{{ path('deleteBex', {'id': bex.id }) }}"><i class="fas fa-times text-white"></i></a></td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+
+	<!-- Prestataires  -->
+	<div class="alert alert-primary d-flex">
+		<div class="flex-grow-1">
+		<h4 class="">Les différents prestataires</h4>
+		</div>
+		<div class="col-auto p-0">
+		<button class="btn btn-outline-primary btn-sm" id="butt-prestataires">
+			<i id="icon-prestataire" class="fas fa-caret-down"></i>
+		</button>
+		</div>
+	</div>
+
+	<div id="c-prestataires" class="pb-3" style="display: none">
+		<table class="w-75 m-auto">
+	{% for prestataire in prestataires %}
+			<tr class="border-bottom-white">
+				<td class="col-11"><p>{{ prestataire.name }}</p></td>
+				<td class="col-1 my-1"><a class="float-right" href="{{ path('deletePrestataire', {'id': prestataire.id }) }}"><i class="fas fa-times text-white"></i></a></td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
+
+	<!-- Villes  -->
+	<div class="alert alert-primary d-flex">
+		<div class="flex-grow-1">
+		<h4 class="">Les différentes villes</h4>
+		</div>
+		<div class="col-auto p-0">
+		<button class="btn btn-outline-primary btn-sm" id="butt-cities">
+			<i id="icon-city" class="fas fa-caret-down"></i>
+		</button>
+		</div>
+	</div>
+
+	<div id="c-cities" class="pb-2" style="display: none">
+		<div class="pb-3 pt-3 d-flex align-items-end flex-column">
+			<button id="butt-delete-city" class="btn btn-sm btn-light">
+				<i id="icon-check-square" class="fas fa-square mr-1 text-blue-light"></i> Supprimer une ville
+			</button>
+		</div>
+		<div class="c-listeCities">
+			{% for city in cities %}
+			<p class="text-center p-city">
+				<a class="disabled a-city" href="{{ path('deleteCity', {'id': city.id }) }}">{{ city.name }}</a>
+			</p>
+			{% endfor %}
+		</div>
+	</div>
+
+		<hr>
+		{{ render(controller('App\\Controller\\FormulaireController::newSector')) }}
+		<hr>
+		{{ render(controller('App\\Controller\\FormulaireController::newPrestataire')) }}
+		<hr>
+		{{ render(controller('App\\Controller\\FormulaireController::newBex')) }}
+		<hr>
+		{{ render(controller('App\\Controller\\FormulaireController::newCity')) }}
+	{% endif %}
+
+{% endblock %}

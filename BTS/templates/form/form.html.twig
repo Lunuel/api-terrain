@@ -1,0 +1,5 @@
+<h2 class="h2-form">{{ title }}</h2>
+{{ form_start(form, {'action': path(action) ,attr: {class: 'form-center'}}) }}
+{# {{ form_start(form, {attr: {class: 'form-center'}}) }} #}
+{{ form_widget(form) }}
+{{ form_end(form) }}

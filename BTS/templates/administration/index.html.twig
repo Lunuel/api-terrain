@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block body %}
+	<script>
+    $(document).ready(function(){
+    	var link = "http://127.0.0.1/Symfony/BTS/public/index.php/listCities";
+		$(function() {
+			var xhReq = new XMLHttpRequest();
+		    xhReq.open("GET", link, false);
+		    xhReq.send(null);
+		    var jsonObject = JSON.parse(xhReq.responseText);
+		    $("#search").autocomplete({
+		        source: jsonObject
+		        //minLength: 2
+		    });
+		});
+    });
+
+    </script>
+
+    <script>
+	$(document).ready(function(){
+        $("#butt-sectors").click(function() {
+	      $("#c-sectors").slideToggle();
+	      $("#icon-sector").toggleClass("fa-caret-down fa-caret-up");
+	    });
+	});
+	$(document).ready(function(){
+	    $("#butt-cities").click(function() {
+	      $("#c-cities").slideToggle();
+	      $("#icon-city").toggleClass("fa-caret-down fa-caret-up");
+	    });
+    });
+	</script>
+
+    <h1>Rechercher une ville</h1>
+    <form class="form-inline w-100 pb-4">
+	    <input id="search" name="search" class="form-control mr-sm-2"  placeholder="Rechercher..." aria-label="Search">
+	    <button class="btn btn-outline-ligth my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+	</form>
+
+	{% if search %}
+		<p>Résultat pour <b>{{ app.request.query.get("search") }}</b></p>
+		{# <p>Nombre de résultats : {{ search|length }}</p> #}
+		{% for city in search %}
+			<p>Ville: {{ city.name }} <i class=" text-blue-light fas fa-long-arrow-alt-right"></i> <span class="text-blue-light">Secteur: {{ city.sector.name }}</span></p>
+		{% endfor %}
+	{% endif %}
+
+{#     {{ render(controller('App\\Controller\\SearchController::newSector')) }}
+
+    {{ render(controller('App\\Controller\\SearchController::newCity')) }} #}
+
+    <h3>Ajouter un secteur</h3>
+
+    {{ form_start(formSector, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_widget(formSector) }}
+	{{ form_end(formSector) }}
+
+	<h3>Ajouter une ville</h3>
+
+    {{ form_start(formCity, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_widget(formCity) }}
+	{{ form_end(formCity) }}
+
+
+{% endblock %}

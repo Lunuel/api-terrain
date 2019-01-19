@@ -1,0 +1,21 @@
+<div class="alert alert-primary d-flex">
+  <div class="flex-grow-1">
+  <h4 class="">Les différents secteurs</h4>
+  </div>
+  <div class="col-auto p-0">
+  <button class="btn btn-outline-primary btn-sm" id="butt-sectors">
+    <i id="icon-sector" class="fas fa-caret-down"></i>
+  </button>
+  </div>
+</div>
+
+<div id="c-sectors" class="pb-3" style="display: none">
+  <table class="w-75 m-auto">
+{% for sector in sectors %}
+    <tr class="border-bottom-white">
+      <td class="col-11"><p>{{ sector.name }}</p></td>
+      <td class="col-1 my-1"><a class="float-right" href="{{ path('deleteSector', {'id': sector.id }) }}"><i class="fas fa-times text-white"></i></a></td>
+    </tr>
+  {% endfor %}
+  </table>
+</div>

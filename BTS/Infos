@@ -1,0 +1,6 @@
+Prestataire -> entreprise  (Ex:GHEE) [Nom]
+fk_Secteur -> plusieurs prestataires
+BEX -> Bureau d'étude [Nom]
+fk_ville -> BEX sur plusieurs villes
+ville(1 *)Bex
+prestataires(* *)secteur
